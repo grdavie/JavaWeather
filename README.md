@@ -1,12 +1,13 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This Weather Forecast Console Program is a Java application that retrieves weather data from the OpenWeather API to 
+display current weather conditions and a 3-day forecast for a specified city.
 
-{Provide a description of the software that you wrote to demonstrate the Java language.}
+It also incorporates file read and write functionality to save weather information locally.
 
-{Describe your purpose for writing this software.}
 
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
+This project was selected to demonstrate the basics of Java and to apply fundamental programming skills and concepts,
+aiding in the process of learning a new programming language.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
@@ -26,14 +27,13 @@ Programming Language:
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [JDK Installation Guide](https://docs.oracle.com/en/java/javase/22/install/overview-jdk-installation.html)
+- [IntelliJ IDEA Community Edition Downloader Mac](https://www.jetbrains.com/idea/download/?section=mac)
+- [W3Schools Java Tutorial](http://url.link.goeshttps://www.w3schools.com/java/default.asp)
+- [BeginnersBook ArrayList Java Tutorial](http://url.link.goes.hehttps://beginnersbook.com/2013/12/java-arraylist/)
+- [OpenWeather Current Weather Data API Documentation](https://openweathermap.org/current)
 
 # Future Work
-
-{Make a list of things that you need to fix, improve, and add in the future.}
 
 - Item 1
 - Item 2
