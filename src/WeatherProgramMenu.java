@@ -20,38 +20,43 @@ public class WeatherProgramMenu {
         int choice;
 
         do {
-
-            System.out.println("-------------- Weather Report Menu --------------");
+            System.out.println("-------------- Weather Report Menu --------------\n");
             System.out.println("1. New Weather Report");
             System.out.println("2. Remove Weather Report");
             System.out.println("3. Display Weather Report");
             System.out.println("4. Clear Weather Reports");
             System.out.println("5. Quit");
-            System.out.println("--------------------------------------------------");
+            System.out.println("\n--------------------------------------------------");
             System.out.print("Enter your choice: ");
 
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
 
-            switch (choice) {
-                case 1:
-                    createNewWeatherReport();
-                    break;
-                case 2:
-                    removeWeatherReport();
-                    break;
-                case 3:
-                    displayMenuWeatherReport();
-                    break;
-                case 4:
-                    clearWeatherReports();
-                    break;
-                case 5:
-                    System.out.println("Exiting program...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                switch (choice) {
+                    case 1:
+                        createNewWeatherReport();
+                        break;
+                    case 2:
+                        removeWeatherReport();
+                        break;
+                    case 3:
+                        displayMenuWeatherReport();
+                        break;
+                    case 4:
+                        clearWeatherReports();
+                        break;
+                    case 5:
+                        System.out.println("Exiting program...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.\n");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.\n");
+                scanner.nextLine(); // Clear scanner buffer to prevent infinite loop
+                choice = 0; // Reset choice to force re-entry
             }
         } while (choice != 5);
 
@@ -148,15 +153,21 @@ public class WeatherProgramMenu {
             return;
         }
 
-        System.out.println("Select a weather report to remove (number only): ");
+        System.out.println("Select a weather report to remove: ");
         displayWeatherReports();
 
-        int index = scanner.nextInt();
-        if (index > 0 && index <= weatherReports.size()) {
-            weatherReports.remove(index - 1); //Adjust user-input index to zero-based index
-            System.out.println("Weather report removed successfully!");
-        } else {
-            System.out.println("Invalid option. No weather report removed.");
+        try {
+            System.out.print("\nEnter choice (number only): ");
+            int index = scanner.nextInt();
+            if (index > 0 && index <= weatherReports.size()) {
+                weatherReports.remove(index - 1); //Adjust user-input index to zero-based index
+                System.out.println("Weather report removed successfully!\n");
+            } else {
+                System.out.println("Invalid option. No weather report removed.\n");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. No weather report removed.\n");
+            scanner.nextLine();
         }
     }
 
@@ -166,21 +177,27 @@ public class WeatherProgramMenu {
             return;
         }
 
-        System.out.println("Select a weather report to display (number only): ");
+        System.out.println("Select a weather report to display: ");
         displayWeatherReports();
 
-        int index = scanner.nextInt();
-        if (index > 0 && index <= weatherReports.size()) {
-            WeatherReport report = weatherReports.get(index -1); //Adjust user-input index to zero-based index
-            report.displayWeatherReport();
-        } else {
-            System.out.println("Invalid option. No weather report displayed.");
+        try {
+            System.out.print("\nEnter choice (number only): ");
+            int index = scanner.nextInt();
+            if (index > 0 && index <= weatherReports.size()) {
+                WeatherReport report = weatherReports.get(index -1); //Adjust user-input index to zero-based index
+                report.displayWeatherReport();
+            } else {
+                System.out.println("Invalid option. No weather report displayed.\n");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. No weather report displayed.\n");
+            scanner.nextLine();
         }
     }
 
     private void displayWeatherReports() {
         for (int i= 0; i < weatherReports.size(); i++) {
-            System.out.println((i + 1) + ". " + weatherReports.get(i).getLocationName());
+            System.out.println("    " + (i + 1) + ". " + weatherReports.get(i).getLocationName());
         }
     }
 
