@@ -41,5 +41,5 @@ External Library:
 - Add a Read and Write to file feature
 - Add Geocoding and Reverse Geocoding features to auto-return the city or location name 
 (if lon-lat coordinates are provided) and vise versa
-- Refactor for a better OOP, reduce dependencies, and add more validation/exceptions handling 
-(e.g. create more interfaces, classes, etc.)
+- Refactor for a better OOP structure, optimize performance, reduce dependencies, and add more validation/exceptions 
+handling (e.g. create more interfaces, classes, etc.)
