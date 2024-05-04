@@ -20,7 +20,7 @@ public class WeatherForecast {
             throw new IllegalArgumentException("API service or weather data cannot be null.");
         }
 
-        HttpURLConnection apiConnection = null;
+        HttpURLConnection apiConnection;
 
         try {
 
@@ -52,9 +52,9 @@ public class WeatherForecast {
         //Create Daily Forecast instances using indices: 8, 16, and 24 - the next 3 days from current date
         //at 00:00:00 timestamp
 
-        this.forecastDay_1 = new DailyForecast(forecastListArray, 8, unit);
-        this.forecastDay_2 = new DailyForecast(forecastListArray, 16, unit);
-        this.forecastDay_3 = new DailyForecast(forecastListArray, 24, unit);
+        this.forecastDay_1 = new DailyForecast(forecastListArray, 7, unit);
+        this.forecastDay_2 = new DailyForecast(forecastListArray, 15, unit);
+        this.forecastDay_3 = new DailyForecast(forecastListArray, 23, unit);
     }
 
     public DailyForecast getForecastDay_1() {

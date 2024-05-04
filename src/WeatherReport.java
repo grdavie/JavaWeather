@@ -14,12 +14,14 @@ public class WeatherReport {
     private WeatherCondition currentWeather;
     private WeatherForecast threeDayForecast;
     private String locationName;
+    private String currentDateTime;
 
 
     public WeatherReport(WeatherAPI apiService, WeatherData weatherData) throws ParseException {
 
         this.locationName = weatherData.getLocationName();
         this.currentWeather = new WeatherCondition(apiService, weatherData);
+        this.currentDateTime = convertUnixToDate(currentWeather.getUnixTimestamp()); //convert Unit time stamp to string
         this.threeDayForecast = new WeatherForecast(apiService, weatherData);
 
     }
@@ -41,11 +43,9 @@ public class WeatherReport {
     }
 
     private void displayCurrentWeather() {
-        //Convert the unixTimestamp
-        String currentDateTime = convertUnixToDate(currentWeather.getUnixTimestamp());
 
         //Display currentWeather information on the Console
-        System.out.println("--------------------------------------------------");
+        System.out.println("\n--------------------------------------------------");
         System.out.println(locationName + ": " + currentDateTime);
         System.out.println("--------------------------------------------------");
 
@@ -59,10 +59,10 @@ public class WeatherReport {
 
     private void displayDailyForecast(DailyForecast dailyForecast) {
         //Convert the unixTimestamp
-        String currentDateTime = convertUnixToDate(dailyForecast.getForecastUnixTimeStamp());
+        String forecastCurrentDateTime = convertUnixToDate(dailyForecast.getForecastUnixTimeStamp());
 
         //Display dailyForecast information on the console
-        System.out.println("Date & Time: " + currentDateTime);
+        System.out.println("Date & Time: " + forecastCurrentDateTime);
         System.out.println("Weather Condition: " + dailyForecast.getForecastDescription());
         System.out.println("Current Temperature: " + dailyForecast.getForecastTemp() + dailyForecast.getForecastUnitSymbol());
         System.out.println("Feels like: " + dailyForecast.getForecastFeelsLikeTemp() + dailyForecast.getForecastUnitSymbol());
@@ -75,10 +75,9 @@ public class WeatherReport {
         displayCurrentWeather();
 
         //3-day forecast header
+        System.out.println("\n--------------------------------------------------");
+        System.out.println("Three-Day Weather Forecast (Refresh Every 3 hours)");
         System.out.println("--------------------------------------------------");
-        System.out.println("Three-Day Weather Forecast");
-        System.out.println("--------------------------------------------------");
-        System.out.println();
 
         displayDailyForecast(threeDayForecast.getForecastDay_1());
         displayDailyForecast(threeDayForecast.getForecastDay_2());
@@ -86,11 +85,10 @@ public class WeatherReport {
 
     }
 
-    public void changeWeatherReportVariables(WeatherAPI apiService, WeatherData weatherData) throws ParseException {
-        this.locationName = weatherData.getLocationName();
-        this.currentWeather = new WeatherCondition(apiService, weatherData);
-        this.threeDayForecast = new WeatherForecast(apiService, weatherData);
+    public String getLocationName() {
+        return locationName + " - " + currentDateTime;
     }
+
 
 }
 
