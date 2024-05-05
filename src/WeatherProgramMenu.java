@@ -11,16 +11,16 @@ public class WeatherProgramMenu {
     private Scanner scanner;
 
     public WeatherProgramMenu() {
-        this.weatherReports = new ArrayList<>();
+        this.weatherReports = new ArrayList<>(); //Creates an ArrayList to store weatherReport objects
         this.scanner = new Scanner(System.in);
     }
 
-    //WeatherProgram Menu
-    public void runMenu() throws ParseException {
+    //Runs and displays the menu on the console
+    public void runMenu() {
         int choice;
 
         do {
-            System.out.println("-------------- Weather Report Menu --------------\n");
+            System.out.println("\n-------------- WEATHER REPORT MENU --------------\n");
             System.out.println("1. New Weather Report");
             System.out.println("2. Remove Weather Report");
             System.out.println("3. Display Weather Report");
@@ -63,19 +63,23 @@ public class WeatherProgramMenu {
         scanner.close();
     }
 
-    private void createNewWeatherReport() throws ParseException {
-        WeatherData weatherData = createWeatherData();
-        WeatherAPI apiService = new OpenWeatherAPI(); //implementation of WeatherAPI interface via OpenWeatherAPI class
-        WeatherReport newReport = new WeatherReport(apiService, weatherData);
+    //Instantiates a WeatherData, a WeatherAPI, and a WeatherReport object
+    private void createNewWeatherReport() {
+        try {
+            WeatherData weatherData = createWeatherData();
+            WeatherAPI apiService = new OpenWeatherAPI(); // implementation of WeatherAPI interface via OpenWeatherAPI class
+            WeatherReport newReport = new WeatherReport(apiService, weatherData);
 
-
-        newReport.displayWeatherReport();
-        weatherReports.add(newReport); //add the weatherReport object to the ArrayList
-
+            newReport.displayWeatherReport(); // automatically displays current weather and 3-day forecast info
+            weatherReports.add(newReport); // add the weatherReport object to the ArrayList
+        } catch (ParseException e) {
+            System.out.println("\n!! Failed to create new weather report: " + e.getMessage() + " !!\n");
+            System.out.println("Please enter VALID COORDINATES.\n");
+        }
     }
 
+    //Collects and Stores user input to create a valid WeatherData object
     private WeatherData createWeatherData() {
-        //Collect and Store user input to create WeatherData object
 
         System.out.println("\n============ Create New Weather Data =============\n");
 
@@ -85,9 +89,9 @@ public class WeatherProgramMenu {
         while (!validChoice) {
             try {
                 System.out.println("Choose temperature unit:");
-                System.out.println("1. Celsius");
-                System.out.println("2. Fahrenheit");
-                System.out.print("Enter your choice (number only): ");
+                System.out.println("    1. Celsius");
+                System.out.println("    2. Fahrenheit");
+                System.out.print("\nEnter your choice (number only): ");
 
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline character
@@ -147,6 +151,7 @@ public class WeatherProgramMenu {
         return new WeatherData(lon, lat, unit, locationName);
     }
 
+    //Removes a WeatherReport object from the ArrayList using index, if available
     private void removeWeatherReport() {
         if (weatherReports.isEmpty()) {
             System.out.println("No weather reports available to remove.\n");
@@ -171,6 +176,7 @@ public class WeatherProgramMenu {
         }
     }
 
+    //Displays a specific WeatherReport from the ArrayList via index, if available
     private void displayMenuWeatherReport() {
         if (weatherReports.isEmpty()) {
             System.out.println("No weather reports available to display. \n");
@@ -195,12 +201,14 @@ public class WeatherProgramMenu {
         }
     }
 
+    //Displays a numbered list of WeatherReport objects inside the array to allow users to select an index (starts at 1)
     private void displayWeatherReports() {
         for (int i= 0; i < weatherReports.size(); i++) {
             System.out.println("    " + (i + 1) + ". " + weatherReports.get(i).getLocationName());
         }
     }
 
+    //Empty the ArrayList (remove all WeatherReport objects)
     private void clearWeatherReports() {
         weatherReports.clear();
         System.out.println("All weather reports cleared.\n");
