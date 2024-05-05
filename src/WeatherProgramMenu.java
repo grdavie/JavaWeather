@@ -204,7 +204,7 @@ public class WeatherProgramMenu {
     //Displays a numbered list of WeatherReport objects inside the array to allow users to select an index (starts at 1)
     private void displayWeatherReports() {
         for (int i= 0; i < weatherReports.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + weatherReports.get(i).getLocationName());
+            System.out.println("    " + (i + 1) + ". " + weatherReports.get(i).getLocationAndDateTime());
         }
     }
 

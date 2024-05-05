@@ -85,7 +85,7 @@ public class WeatherReport {
 
     }
 
-    public String getLocationName() {
+    public String getLocationAndDateTime() {
         return locationName + " - " + currentDateTime;
     }
 
